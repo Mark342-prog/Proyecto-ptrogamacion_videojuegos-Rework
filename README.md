@@ -1,1 +1,1 @@
-# Proyecto-ptrogamaci-n_videojuegos-Rework
+# Proyecto-ptrogamación_videojuegos-Rework
