@@ -17,15 +17,13 @@ public class CompleteMinimap : MonoBehaviour
 
     void Start()
     {
-        // Esperar a que el MapGenerator cree las habitaciones
         Invoke("SetupCompleteMinimap", 0.5f);
     }
 
     void SetupCompleteMinimap()
     {
         Debug.Log("Iniciando configuración completa del minimapa...");
-        
-        // 1. Crear cámara del minimapa
+
         CreateMinimapCamera();
         
         // 2. Crear UI del minimapa
