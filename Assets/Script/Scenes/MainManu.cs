@@ -68,7 +68,7 @@ public class MainMenuManager : MonoBehaviour
         // Configurar botón INICIAR (CRÍTICO)
         if (startButton != null)
         {
-            startButton.onClick.RemoveAllListeners(); // Limpiar listeners previos
+            startButton.onClick.RemoveAllListeners();
             startButton.onClick.AddListener(StartGame);
             if (debugMode) Debug.Log("Listener de StartButton configurado");
         }
@@ -86,7 +86,7 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    void StartGame()
+    public void StartGame() // Cambiado a público para acceso externo
     {
         if (debugMode) Debug.Log("Botón Iniciar Juego presionado");
         
@@ -94,13 +94,13 @@ public class MainMenuManager : MonoBehaviour
         if (GameManager.Instance == null)
         {
             Debug.LogError("GameManager.Instance es null!");
-            return;
-        }
-
-        // Verificar que el MapGenerator esté listo
-        if (GameManager.Instance.mapGenerator == null)
-        {
-            Debug.LogError("MapGenerator no asignado en GameManager!");
+            // Intentar encontrar el GameManager
+            GameManager gm = FindObjectOfType<GameManager>();
+            if (gm != null)
+            {
+                Debug.Log("GameManager encontrado manualmente");
+                gm.StartGame();
+            }
             return;
         }
 

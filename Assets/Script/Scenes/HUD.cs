@@ -72,35 +72,52 @@ public class HUDManager : MonoBehaviour
     }
     
     void UpdateHUD()
+{
+    // Si no tenemos referencias, intentar encontrarlas
+    if (mapGenerator == null)
     {
-        // Si no tenemos referencias, intentar encontrarlas
-        if (mapGenerator == null || player == null)
+        FindReferences();
+        if (mapGenerator == null) return; // Si sigue siendo null, salir
+    }
+    
+    // Buscar jugador continuamente si no está asignado
+    if (player == null)
+    {
+        FindReferences();
+        if (player == null) return; // Si sigue siendo null, salir
+    }
+    
+    // Actualizar información de habitaciones
+    if (roomCountText != null)
+    {
+        try
         {
-            FindReferences();
-            return;
+            int roomCount = mapGenerator.GetRoomCount();
+            roomCountText.text = $"Habitaciones: {roomCount}";
         }
-        
-        // Actualizar información de habitaciones
-        if (roomCountText != null)
+        catch (System.Exception e)
         {
-            try
-            {
-                roomCountText.text = $"Habitaciones: {mapGenerator.GetRoomCount()}";
-            }
-            catch (System.Exception e)
-            {
-                roomCountText.text = "Habitaciones: --";
-                Debug.LogWarning("Error actualizando contador de habitaciones: " + e.Message);
-            }
-        }
-        
-        // Actualizar posición del jugador
-        if (playerPositionText != null && player != null)
-        {
-            Vector3 pos = player.position;
-            playerPositionText.text = $"Posición: ({pos.x:F0}, {pos.z:F0})";
+            roomCountText.text = "Habitaciones: --";
+            if (debugMode) Debug.LogWarning("Error actualizando contador de habitaciones: " + e.Message);
         }
     }
+    
+    // Actualizar posición del jugador
+    if (playerPositionText != null && player != null)
+    {
+        Vector3 pos = player.position;
+        playerPositionText.text = $"Posición: ({pos.x:F0}, {pos.z:F0})";
+    }
+}
+
+// Añadir esta variable y método:
+private bool debugMode = true;
+
+public void SetMapGeneratorReference(MapGenerator generator)
+{
+    mapGenerator = generator;
+    if (debugMode) Debug.Log("MapGenerator asignado al HUD");
+}
     
     void PauseGame()
     {
