@@ -10,7 +10,7 @@ public class MinimapSetup : MonoBehaviour
 
     [Header("Configuración")]
     public int renderTextureSize = 256;
-    public LayerMask minimapLayers = -1; // Todas las layers por defecto
+    public LayerMask minimapLayers = -1; 
 
     void Start()
     {

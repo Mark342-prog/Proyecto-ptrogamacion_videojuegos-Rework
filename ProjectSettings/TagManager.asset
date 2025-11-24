@@ -9,6 +9,16 @@ TagManager:
   - SpawnRoom
   - Room
   - MinimapTile
+  - Head
+  - NPC
+  - LevelTrigger
+  - Wall
+  - ScoreText
+  - AmmoText
+  - AmmoPickup
+  - GameOverPanel
+  - FinalScoreText
+  - UICanvas
   layers:
   - Default
   - TransparentFX
@@ -16,9 +26,9 @@ TagManager:
   - Minimap
   - Water
   - UI
-  - 
-  - 
-  - 
+  - room
+  - NPC
+  - Enemy
   - 
   - 
   - 
